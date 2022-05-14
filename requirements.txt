@@ -1,0 +1,14 @@
+attrs
+aws-cdk-lib
+boto3
+botocore
+cattrs
+constructs>=10.0.0,<11.0.0
+jmespath
+jsii
+publication
+python-dateutil
+s3transfer
+six
+typing-extensions
+urllib3

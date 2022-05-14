@@ -1,0 +1,17 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PreventPrivilegeEscalation",
+            "Effect": "Deny",
+            "Action": [
+                "iam:PassRole"
+            ],
+            "Resource": [
+                "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+                "arn:aws:iam::*:role/*ControlTower*",
+                "arn:aws:iam::*:role/*controltower*"
+            ]
+        }
+    ]
+  }

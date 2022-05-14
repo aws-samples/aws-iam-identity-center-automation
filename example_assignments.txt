@@ -1,0 +1,8 @@
+FullAdminPermSet,SSOCloudAdmin,all
+CWDashboardReadPermSet,OutpostMonitor,ou-1abc-a1bcdefg
+PowerUserPermSet,OutpostAdmin,ou-2abc-a2bcdefg
+FullBillingPermSet,Billing,123456789012
+BillingReadPermSet,BillingRead,123456789012
+CWDashboardReadPermSet,CustomerOpsA,123456789012
+CustDeveloperPermSet,CustomerDevelopersA,123456789012
+CustDevOpsPermSet,CustomerDevOpsA,123456789012
