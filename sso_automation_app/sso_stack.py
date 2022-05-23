@@ -5,7 +5,7 @@ from constructs import Construct
 import json
 import logging
 import re
-import org_deploy
+import org_enum
 
 logger = logging.getLogger(__name__)
 ch = logging.StreamHandler()
@@ -83,11 +83,11 @@ def get_target_account(profile, target):
     m = re.fullmatch(r'All', target, flags=re.I)
     a = re.match(r'[0-9]', target)
     if m:
-        org_accounts = org_deploy.get_all_accounts(profile)
+        org_accounts = org_enum.get_all_accounts(profile)
     if a:
         org_accounts.append(target)
     if o:
-        org_accounts = org_deploy.get_accounts_for_ou(profile, target)
+        org_accounts = org_enum.get_accounts_for_ou(profile, target)
     return org_accounts
 
 
