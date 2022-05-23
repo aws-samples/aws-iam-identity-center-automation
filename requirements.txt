@@ -12,3 +12,4 @@ s3transfer
 six
 typing-extensions
 urllib3
+cdk-nag>=2.14.11

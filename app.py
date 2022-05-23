@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
-from aws_cdk import App, Environment
+from aws_cdk import App, Environment, Aspects
 from sso_automation_app.sso_stack import AWSSSOStack
 import logging
+import cdk_nag
 
 logger = logging.getLogger(__name__)
 loghandler = logging.StreamHandler()
@@ -26,6 +27,7 @@ env_info = Environment(account=account_id, region=region_name)
 if profile and env_info:
     if sso_permission_sets and sso_assignments:
         AWSSSOStack(app, "awssso-stack", sso_permission_sets, sso_assignments, profile, env=env_info)
+        Aspects.of(app).add(cdk_nag.AwsSolutionsChecks())
 else:
     logger.debug("Failed to specify a profile and environment")
 
