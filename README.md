@@ -36,7 +36,7 @@ Try to view the Help (-h) of our program to make sure that you have your environ
 python sso_automation.py sso -h
 ```
 
-You can use the following command to output a JSON file that describes your AWS Organization structure with the 
+You can use the following command to output a JSON file named "org_data.json", that describes your AWS Organization structure with the 
 necessary ID's to use in the AWS SSO input files
 ```shell
 python sso_automation.py describe-org --profile SSO-test
