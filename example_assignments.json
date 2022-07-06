@@ -1,12 +1,44 @@
 {
-    "assignments" : [
-        { "permissionSet" : "FullAdminPermSet", "groupName" : "SSOCloudAdmin", "target" : "all" },
-        { "permissionSet" : "CWDashboardReadPermSet", "groupName" : "OutpostMonitor", "target" : "ou-1abc-a1bcdefg" },
-        { "permissionSet" : "PowerUserPermSet", "groupName" : "PowerUser", "target" : "ou-2abc-a2bcdefg" },
-        { "permissionSet" : "FullBillingPermSet", "groupName" : "Billing", "target" : "123456789012" },
-        { "permissionSet" : "BillingReadPermSet", "groupName" : "BillingRead", "target" : "123456789012" },
-        { "permissionSet" : "CWDashboardReadPermSet", "groupName" : "CustomerOpsA", "target" : "123456789012" },
-        { "permissionSet" : "CustDeveloperPermSet", "groupName" : "CustomerDevelopersA", "target" : "123456789012" },
-        { "permissionSet" : "CustDevOpsPermSet", "groupName" : "CustomerDevOpsA", "target" : "123456789012" }
+    "assignments": [
+        {
+            "permissionSet": "FullAdminPermSet",
+            "groupName": "SSOCloudAdmin",
+            "target": "all"
+        },
+        {
+            "permissionSet": "CWDashboardReadPermSet",
+            "groupName": "OutpostMonitor",
+            "target": "ou-1abc-a1bcdefg"
+        },
+        {
+            "permissionSet": "PowerUserPermSet",
+            "groupName": "PowerUser",
+            "target": "ou-2abc-a2bcdefg"
+        },
+        {
+            "permissionSet": "FullBillingPermSet",
+            "groupName": "Billing",
+            "target": "123456789012"
+        },
+        {
+            "permissionSet": "BillingReadPermSet",
+            "groupName": "BillingRead",
+            "target": "123456789012"
+        },
+        {
+            "permissionSet": "CWDashboardReadPermSet",
+            "groupName": "CustomerOpsA",
+            "target": "123456789012"
+        },
+        {
+            "permissionSet": "CustDeveloperPermSet",
+            "groupName": "CustomerDevelopersA",
+            "target": "123456789012"
+        },
+        {
+            "permissionSet": "CustDevOpsPermSet",
+            "groupName": "CustomerDevOpsA",
+            "target": "123456789012"
+        }
     ]
 }
