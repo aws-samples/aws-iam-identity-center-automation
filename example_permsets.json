@@ -1,0 +1,11 @@
+{
+    "permissionSets" : [
+        {"permissionSetName" : "CWDashboardReadPermSet", "managedPolicies":["arn:aws:iam::aws:policy/CloudWatchAutomaticDashboardsAccess", "arn:aws:iam::aws:policy/CloudWatchReadOnlyAccess", "arn:aws:iam::aws:policy/job-function/ViewOnlyAccess"], "customPolicy": ""},
+        {"permissionSetName" : "FullAdminPermSet", "managedPolicies":["arn:aws:iam::aws:policy/AdministratorAccess"], "customPolicy": ""},
+        {"permissionSetName" : "PowerUserPermSet", "managedPolicies":["arn:aws:iam::aws:policy/PowerUserAccess"], "customPolicy": "powerusercustompolicy.json"},
+        {"permissionSetName" : "FullBillingPermSet", "managedPolicies":["arn:aws:iam::aws:policy/job-function/Billing"], "customPolicy": ""},
+        {"permissionSetName" : "BillingReadPermSet", "managedPolicies":["arn:aws:iam::aws:policy/AWSBillingReadOnlyAccess"], "customPolicy": ""},
+        {"permissionSetName" : "DeveloperPermSet", "managedPolicies":["arn:aws:iam::aws:policy/CloudWatchAutomaticDashboardsAccess", "arn:aws:iam::aws:policy/CloudWatchReadOnlyAccess", "arn:aws:iam::aws:policy/job-function/ViewOnlyAccess"], "customPolicy": "developercustompolicy.json"},
+        {"permissionSetName" : "DevOpsPermSet", "managedPolicies":["arn:aws:iam::aws:policy/CloudWatchAutomaticDashboardsAccess", "arn:aws:iam::aws:policy/CloudWatchReadOnlyAccess", "arn:aws:iam::aws:policy/job-function/ViewOnlyAccess"], "customPolicy": "devopscustompolicy.json"}
+    ]
+}

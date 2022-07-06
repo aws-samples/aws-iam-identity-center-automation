@@ -1,7 +1,0 @@
-CWDashboardReadPermSet,arn:aws:iam::aws:policy/CloudWatchAutomaticDashboardsAccess|arn:aws:iam::aws:policy/CloudWatchReadOnlyAccess|arn:aws:iam::aws:policy/job-function/ViewOnlyAccess,
-FullAdminPermSet,arn:aws:iam::aws:policy/AdministratorAccess,
-PowerUserPermSet,arn:aws:iam::aws:policy/PowerUserAccess,powerusercustompolicy.json
-FullBillingPermSet,arn:aws:iam::aws:policy/job-function/Billing,
-BillingReadPermSet,arn:aws:iam::aws:policy/AWSBillingReadOnlyAccess,
-DeveloperPermSet,arn:aws:iam::aws:policy/CloudWatchAutomaticDashboardsAccess|arn:aws:iam::aws:policy/CloudWatchReadOnlyAccess|arn:aws:iam::aws:policy/job-function/ViewOnlyAccess,developercustompolicy.json
-DevOpsPermSet,arn:aws:iam::aws:policy/CloudWatchAutomaticDashboardsAccess|arn:aws:iam::aws:policy/CloudWatchReadOnlyAccess|arn:aws:iam::aws:policy/job-function/ViewOnlyAccess,devopscustompolicy.json

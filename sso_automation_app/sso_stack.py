@@ -36,21 +36,20 @@ def check_acct(acct):
             return bool(flag)
 
 
-def get_permission_sets(permission_sets):
+def get_permission_sets(permission_sets_file):
     managed_policy_list = []
     permission_set_name = []
     custom_policy_list = []
-    with open(permission_sets, "r") as perm_file:
-        for permset in perm_file:
-            perm_name = permset.split(",")[0]
-            permission_set_name.append(perm_name)
-            managed_policies = permset.strip().split(",")[1]
-            if "|" in managed_policies:
-                managed_policy_list.append(managed_policies.strip().split("|"))
-            else:
-                managed_policy_list.append(managed_policies)
-            custom_policy = permset.strip().split(",")[2]
-            custom_policy_list.append(custom_policy)
+    with open(permission_sets_file, "r") as perm_file:
+        permission_sets = json.load(perm_file)
+
+        for permset in permission_sets["permissionSets"]:
+            logger.debug("permset: " + json.dumps(permset))
+
+            permission_set_name.append(permset["permissionSetName"])
+            managed_policy_list.append(permset["managedPolicies"])
+            custom_policy_list.append(permset["customPolicy"])
+
     return permission_set_name, managed_policy_list, custom_policy_list
 
 
@@ -91,22 +90,22 @@ def get_target_account(profile, target):
     return org_accounts
 
 
-def get_assign(assignments, profile, sso_id_store):
+def get_assign(assignments_file, profile, sso_id_store):
     allocated = []
-    with open(assignments, "r") as assign_file:
-        for assign in assign_file:
-            assign = assign.strip()
-            if assign == "":
-                continue
-            else:
-                logger.debug("assign: " + assign)
+    with open(assignments_file, "r") as assign_file:
+        assignments = json.load(assign_file)
 
-                perm_set = assign.split(",")[0]
-                grp_name = assign.split(",")[1]
-                group_details = get_group_ids(profile, sso_id_store, grp_name)
-                target = assign.split(",")[2].strip()
-                target_accounts = get_target_account(profile, target)
-                allocated.append((group_details, target_accounts, perm_set))
+        for assign in assignments["assignments"]:
+            logger.debug("assign: " + json.dumps(assign))
+
+            perm_set = assign["permissionSet"]
+            grp_name = assign["groupName"]
+            group_details = get_group_ids(profile, sso_id_store, grp_name)
+            
+            target = assign["target"]
+            target_accounts = get_target_account(profile, target)
+
+            allocated.append((group_details, target_accounts, perm_set))
     return allocated
 
 
@@ -124,6 +123,8 @@ class AWSSSOStack(Stack):
         perm_sets = {}
         index = 0
         for perm_name in self.permnames:
+            new_perm_set = sso.CfnPermissionSet(self, perm_name, instance_arn=self.ssoinstancearn, name=perm_name)
+            
             if self.custompolicies[index]:
                 with open('./inline_policies/' + self.custompolicies[index], 'r') as f:
                     check = f.read()
@@ -132,53 +133,15 @@ class AWSSSOStack(Stack):
                     except ValueError as e:
                         logger.debug(
                             f"Inline Policy {self.custompolicies[index]} is not in a valid JSON format. Error {e}")
-                if isinstance(self.managedpolicies[index], list):
-                    if self.managedpolicies[index] == "":
-                        self.permset = sso.CfnPermissionSet(
-                            self, perm_name,
-                            instance_arn=self.ssoinstancearn,
-                            name=perm_name,
-                            inline_policy=custom_policy_contents
-                        )
-                    else:
-                        self.permset = sso.CfnPermissionSet(
-                            self, perm_name,
-                            instance_arn=self.ssoinstancearn,
-                            name=perm_name,
-                            managed_policies=self.managedpolicies[index],
-                            inline_policy=custom_policy_contents
-                        )
-                else:
-                    if self.managedpolicies[index] == "":
-                        self.permset = sso.CfnPermissionSet(
-                            self, perm_name,
-                            instance_arn=self.ssoinstancearn,
-                            name=perm_name,
-                            inline_policy=custom_policy_contents
-                        )
-                    else:
-                        self.permset = sso.CfnPermissionSet(
-                            self, perm_name,
-                            instance_arn=self.ssoinstancearn,
-                            name=perm_name,
-                            managed_policies=[self.managedpolicies[index]],
-                            inline_policy=custom_policy_contents
-                        )
-            else:
-                if isinstance(self.managedpolicies[index], list) and self.managedpolicies[index] != "":
-                    self.permset = sso.CfnPermissionSet(
-                        self, perm_name,
-                        instance_arn=self.ssoinstancearn,
-                        name=perm_name,
-                        managed_policies=self.managedpolicies[index]
-                    )
-                else:
-                    self.permset = sso.CfnPermissionSet(
-                        self, perm_name,
-                        instance_arn=self.ssoinstancearn,
-                        name=perm_name,
-                        managed_policies=[self.managedpolicies[index]]
-                    )
+                
+                new_perm_set.inline_policy = custom_policy_contents
+
+            if isinstance(self.managedpolicies[index], list) and self.managedpolicies[index] != "":
+                new_perm_set.managed_policies = self.managedpolicies[index]
+            elif self.managedpolicies[index] != "":
+                new_perm_set.managed_policies = [self.managedpolicies[index]]
+
+            self.permset = new_perm_set
             perm_sets[perm_name] = self.permset.attr_permission_set_arn
             index += 1
         # Get default permission sets
