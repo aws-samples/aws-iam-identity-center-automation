@@ -7,7 +7,7 @@ setup(
     name="sso_automation_app",
     version="1.0.0",
 
-    description="A CDK Python app for SSO Automation",
+    description="A CDK Python app for AWS IAM Identity Center Automation",
     long_description=long_description,
     long_description_content_type="text/markdown",
 

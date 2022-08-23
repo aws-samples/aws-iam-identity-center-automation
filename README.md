@@ -6,7 +6,7 @@ This project accelerates the implementation of # AWS IAM Identity Center by auto
 
 Before you start you should have the following prerequisites:
 
-- An Organization in [AWS Organizations](https://docs.aws.amazon.com/organizations/index.html)
+- An organization in [AWS Organizations](https://docs.aws.amazon.com/organizations/index.html)
 - [Groups](https://docs.aws.amazon.com/singlesignon/latest/userguide/users-groups-provisioning.html#groups-concept) in [AWS IAM Identity Center](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)
 - Administrative access for the Organization Management account
 - Python version 3.7.10 or later
@@ -46,16 +46,16 @@ aws configure
 ```
 
 ## Test
-Try to view the Help (-h) command to make sure that you have your environment setup correctly:
+Run the Help (-h) command to make sure that you have your environment setup correctly:
 
 ```shell
-python sso_automation.py sso -h
+python id_center_automation.py id-center -h
 ```
 
 You can use the following command to output a JSON file named "org_data.json", that describes your AWS Organization structure with the 
 necessary IDs to use in the AWS IAM Identity Center input files:
 ```shell
-python sso_automation.py describe-org --profile SSO-test
+python id_center_automation.py describe-org --profile IAMIdentityCenter-test
 ```
 
 ## Bootstrap AWS Environment
@@ -96,17 +96,17 @@ account. You can use the [example_assignments.json](example_assignments.json) fi
 
 The following command will generate the cloudformation to apply the configured changes without deploying them 
 ```shell
-python sso_automation.py sso --region us-east-1 --profile SSO-test --mgmtacct 123456789012 --permsets permsets.json --assignments assignments.json
+python id_center_automation.py id-center --region us-east-1 --profile IAMIdentityCenter-test --mgmtacct 123456789012 --permsets permsets.json --assignments assignments.json
 ```
 
 Deploy the stack by adding the "--deploy" flag
 ```shell
-python sso_automation.py sso --region us-east-1 --profile SSO-test --mgmtacct 123456789012 --permsets permsets.json --assignments assignments.json --deploy
+python id_center_automation.py id-center --region us-east-1 --profile IAMIdentityCenter-test --mgmtacct 123456789012 --permsets permsets.json --assignments assignments.json --deploy
 ```
 
 Destroy the stack by adding the "--destroy" flag
 ```shell
-python sso_automation.py sso --region us-east-1 --profile SSO-test --mgmtacct 123456789012 --permsets permsets.json --assignments assignments.json --destroy
+python id_center_automation.py id-center --region us-east-1 --profile IAMIdentityCenter-test --mgmtacct 123456789012 --permsets permsets.json --assignments assignments.json --destroy
 ```
 
 ### Troubleshooting

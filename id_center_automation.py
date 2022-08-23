@@ -19,7 +19,7 @@ def build_parser():
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument("-v", "--version", action="version", version=f'%(prog)s 1.0.0')
     subparsers = arg_parser.add_subparsers(dest='subcommand', help="sub-command help")
-    sso_parser = subparsers.add_parser('sso', help='AWS SSO stack')
+    sso_parser = subparsers.add_parser('id-center', help='AWS IAM Identity Center stack')
     sso_parser.add_argument("--permsets", dest="permsets", help="File containing permission sets")
     sso_parser.add_argument("--assignments", dest="assignments", help="File containing assignments")
     sso_parser.add_argument("--mgmtacct", help="AWS Organizations Management Account")
@@ -73,7 +73,7 @@ if __name__ == "__main__":
 
         logger.info(f"AWS Organization info saved in {org_info_file}")
 
-    if args.subcommand == "sso":
+    if args.subcommand == "id-center":
         output_dir = "./cfn_templates/"
         output_file = "aws_sso_auto.json"
         sso_stack = output_dir + output_file
@@ -91,7 +91,7 @@ if __name__ == "__main__":
             if sso_response.returncode == 0:
                 logger.info(f"Template generated in {sso_stack}")
             else:
-                logger.info(f"Failed to synth template for AWS SSO permission sets")
+                logger.info(f"Failed to synth template for AWS IAM Identity Center permission sets")
 
             if args.deploy:
                 sso_deploy_cmd = "cdk deploy --ec2creds false -c permsets=" + args.permsets + " -c assignments=" + \
