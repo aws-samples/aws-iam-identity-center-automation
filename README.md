@@ -1,13 +1,13 @@
-# AWS SSO Configuration Automation
+# AWS IAM Identity Center Configuration Automation
 
-This project accelerates the implementation of AWS SSO by automating the configuration of permission sets and assignments using AWS Cloud Development Kit (CDK).
+This project accelerates the implementation of # AWS IAM Identity Center by automating the configuration of permission sets and assignments using AWS Cloud Development Kit (CDK).
 
 ## Prerequisites
 
 Before you start you should have the following prerequisites:
 
 - An Organization in [AWS Organizations](https://docs.aws.amazon.com/organizations/index.html)
-- [Groups](https://docs.aws.amazon.com/singlesignon/latest/userguide/users-groups-provisioning.html#groups-concept) in [AWS SSO](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)
+- [Groups](https://docs.aws.amazon.com/singlesignon/latest/userguide/users-groups-provisioning.html#groups-concept) in [AWS IAM Identity Center](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)
 - Administrative access for the Organization Management account
 - Python version 3.7.10 or later
 - Git
@@ -17,7 +17,7 @@ Before you start you should have the following prerequisites:
 
 Clone this repo:
 ```shell
-$ git clone https://github.com/aws-samples/aws-sso-configuration-automation.git
+$ git clone https://github.com/aws-samples/aws-iam-identity-center-automation.git
 ```
 
  To create a virtualenv run the following command after installing python:
@@ -53,7 +53,7 @@ python sso_automation.py sso -h
 ```
 
 You can use the following command to output a JSON file named "org_data.json", that describes your AWS Organization structure with the 
-necessary IDs to use in the AWS SSO input files:
+necessary IDs to use in the AWS IAM Identity Center input files:
 ```shell
 python sso_automation.py describe-org --profile SSO-test
 ```
@@ -77,7 +77,7 @@ Once you have the CDK Bootstrap template generated login to the [AWS Console](ht
 This prepares the environment so that you can deploy your changes directly using CDK. Please note, we always recommend 
 a thorough review before deploying though. 
 
-## SSO Automation
+## AWS IAM Identity Center Automation
 
 ### Custom Policies
 Create all your inline custom IAM policies inside the sub folder [inline_policies](/inline_policies/), there are a few examples there already.
