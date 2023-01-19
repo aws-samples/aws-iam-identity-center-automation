@@ -178,7 +178,7 @@ class AWSSSOStack(Stack):
                     principal_id = v
 
                 self.assign = sso.CfnAssignment(
-                    self, grp_name + "Assignment" + str(count),
+                    self, grp_name + "Assignment" + acct_id,
                     instance_arn=self.ssoinstancearn,
                     permission_set_arn=self.permission_set_arns[item[2]],
                     principal_id=principal_id,
